@@ -1,0 +1,66 @@
+package PrimerProyecto;
+import java.util.List;
+
+import PrimerProyecto.Proyecto.Exportador;
+
+public class Proyecto09Rf {
+	  private static final String SEPARADOR = "=== REPORTE ===";
+
+	    public void generarReporte(List<Integer> datos, Exportador exportador) {
+	        imprimirCabecera();
+	        imprimirDatos(datos);
+	        
+	        int total = calcularTotal(datos);
+	        imprimirTotal(total);
+	        
+	        exportarDatos(exportador);
+	    }
+
+	    /**
+	     * Patrón 1: Extract Method - Responsabilidad separada
+	     */
+	    private void imprimirCabecera() {
+	        System.out.println(SEPARADOR);
+	    }
+
+	    /**
+	     * Patrón 1: Extract Method - Responsabilidad separada
+	     */
+	    private void imprimirDatos(List<Integer> datos) {
+	        for (Integer dato : datos) {
+	            System.out.println(dato.toString());
+	        }
+	    }
+
+	    /**
+	     * Patrón 1: Extract Method - Responsabilidad separada
+	     * Patrón 3: Sin instanceof ni casting gracias a genéricos
+	     */
+	    private int calcularTotal(List<Integer> datos) {
+	        int total = 0;
+	        for (Integer dato : datos) {
+	            total += dato;
+	        }
+	        return total;
+	    }
+
+	    /**
+	     * Patrón 1: Extract Method - Responsabilidad separada
+	     */
+	    private void imprimirTotal(int total) {
+	        System.out.println("Total: " + total);
+	    }
+
+	    /**
+	     * Patrón 2: Strategy Pattern - Polimorfismo en lugar de condicionales
+	     */
+	    private void exportarDatos(Exportador exportador) {
+	        if (exportador != null) {
+	            exportador.exportar();
+	        }
+	    }
+
+
+
+
+}
